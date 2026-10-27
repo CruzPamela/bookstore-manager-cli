@@ -4,8 +4,10 @@
   "description": "Projeto final SCTEC - sistema de livraria via terminal com Node.js e TypeScript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "build": "tsc",
+  "dev": "tsc && node dist/main.js",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CruzPamela/bookstore-manager-cli.git"
