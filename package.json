@@ -1,0 +1,24 @@
+{
+  "name": "bookstore-manager-cli",
+  "version": "1.0.0",
+  "description": "Projeto final SCTEC - sistema de livraria via terminal com Node.js e TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CruzPamela/bookstore-manager-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CruzPamela/bookstore-manager-cli/issues"
+  },
+  "homepage": "https://github.com/CruzPamela/bookstore-manager-cli#readme",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
