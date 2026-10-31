@@ -1,20 +1,28 @@
 import { AutorRepository } from "./repositories/AutorRepository";
+import { LivroRepository } from "./repositories/LivroRepository";
 import { AutorService } from "./services/AutorService";
 import { AutorController } from "./controllers/AutorController";
 import { AutorMenu } from "./menus/AutorMenu";
 import { prompt } from "./utils/prompt";
+import { LivroService } from "./services/LivroService";
+import { LivroController } from "./controllers/LivroController";
+import { LivroMenu } from "./menus/LivroMenu";
 
 async function main(): Promise<void> {
-
     const autorRepository = new AutorRepository();
-    const autorService = new AutorService(autorRepository);
+    const livroRepository = new LivroRepository();
+    const autorService = new AutorService(autorRepository, livroRepository);
     const autorController = new AutorController(autorService);
     const autorMenu = new AutorMenu(autorController);
+    const livroService = new LivroService(livroRepository, autorRepository);
+    const livroController = new LivroController(livroService);
+    const livroMenu = new LivroMenu(livroController);
 
     let opcao = "";
     while (opcao !== "0") {
         console.log("\n=== BOOKSTORE MANAGER ===");
         console.log("1 - Autores");
+        console.log("2 - Livros");
         console.log("0 - Encerrar aplicação");
         opcao = prompt("Escolha uma opção: ");
 
@@ -22,9 +30,12 @@ async function main(): Promise<void> {
             case "1":
                 await autorMenu.exibir();
                 break;
+            case "2":
+                await livroMenu.exibir();
+                break;
             case "0":
                 console.log("Até logo!");
-                break
+                break;
             default:
                 console.log("Opção inválida.");
         }

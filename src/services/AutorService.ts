@@ -1,11 +1,14 @@
 import { Autor } from "../models/Autor";
 import { AutorRepository } from "../repositories/AutorRepository";
+import { LivroRepository } from "../repositories/LivroRepository";
 
 export class AutorService {
     private repository: AutorRepository;
+    private livroRepository: LivroRepository;
 
-    constructor(repository: AutorRepository) {
+    constructor(repository: AutorRepository, livroRepository: LivroRepository) {
         this.repository = repository;
+        this.livroRepository = livroRepository;
     }
 
 
@@ -43,6 +46,10 @@ export class AutorService {
 
     async remover(id: number): Promise<void> {
         await this.buscarPorId(id);
+        const livros = await this.livroRepository.listarPorAutor(id);
+        if (livros.length > 0) {
+            throw new Error("Não é possível remover: o autor possui livros cadastrados.");
+        }
         await this.repository.remover(id);
     }
 
