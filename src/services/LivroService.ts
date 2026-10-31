@@ -1,14 +1,17 @@
 import { Livro } from "../models/Livro";
 import { LivroRepository } from "../repositories/LivroRepository";
 import { AutorRepository } from "../repositories/AutorRepository";
+import { EmprestimoRepository } from "../repositories/EmprestimoRepository";
 
 export class LivroService {
     private livroRepository: LivroRepository;
     private autorRepository: AutorRepository;
+    private emprestimoRepository: EmprestimoRepository;
 
-    constructor(livroRepository: LivroRepository, autoreRepository: AutorRepository) {
+    constructor(livroRepository: LivroRepository, autorRepository: AutorRepository, emprestimoRepository: EmprestimoRepository) {
         this.livroRepository = livroRepository;
-        this.autorRepository = autoreRepository;
+        this.autorRepository = autorRepository;
+        this.emprestimoRepository = emprestimoRepository;
     }
 
     async cadastrar(
@@ -75,9 +78,13 @@ export class LivroService {
         return this.livroRepository.listar();
     }
 
-    async remover(id: number): Promise<void> {
-        await this.buscarPorId(id);
-        await this.livroRepository.remover(id);
+      async remover(id: number): Promise<void> {
+    await this.buscarPorId(id);
+    const ativos = await this.emprestimoRepository.listarAtivosPorLivro(id);
+    if (ativos.length > 0) {
+      throw new Error("Não é possível remover: o livro está em empréstimo.");
     }
+    await this.livroRepository.remover(id);
+  }
 
 }
