@@ -7,6 +7,10 @@ import { prompt } from "./utils/prompt";
 import { LivroService } from "./services/LivroService";
 import { LivroController } from "./controllers/LivroController";
 import { LivroMenu } from "./menus/LivroMenu";
+import { ClienteRepository } from "./repositories/ClienteRepository";
+import { ClienteService } from "./services/ClienteService";
+import { ClienteController } from "./controllers/ClienteController";
+import { ClienteMenu } from "./menus/ClienteMenu";
 
 async function main(): Promise<void> {
     const autorRepository = new AutorRepository();
@@ -17,12 +21,17 @@ async function main(): Promise<void> {
     const livroService = new LivroService(livroRepository, autorRepository);
     const livroController = new LivroController(livroService);
     const livroMenu = new LivroMenu(livroController);
+    const clienteRepository = new ClienteRepository();
+    const clienteService = new ClienteService(clienteRepository);
+    const clienteController = new ClienteController(clienteService);
+    const clienteMenu = new ClienteMenu(clienteController);
 
     let opcao = "";
     while (opcao !== "0") {
         console.log("\n=== BOOKSTORE MANAGER ===");
         console.log("1 - Autores");
         console.log("2 - Livros");
+        console.log("3 - Clientes");
         console.log("0 - Encerrar aplicação");
         opcao = prompt("Escolha uma opção: ");
 
@@ -32,6 +41,9 @@ async function main(): Promise<void> {
                 break;
             case "2":
                 await livroMenu.exibir();
+                break;
+            case "3":
+                await clienteMenu.exibir();
                 break;
             case "0":
                 console.log("Até logo!");
