@@ -6,6 +6,10 @@ Aplicação de linha de comando (CLI) para gerenciar uma livraria: autores, livr
 
 Aplicar na prática os conteúdos do módulo: lógica de programação, TypeScript, orientação a objetos, programação assíncrona, arquitetura em camadas, banco de dados relacional (PostgreSQL) e versionamento com Git e GitHub.
 
+## 🎥 Vídeo de apresentação
+
+🎬 [BookStore Manager CLI - Pamela Cruz](https://drive.google.com/file/d/1oxOaiAZqhbKL4JgbC2o5iRDjUjX82qRb/view?usp=drivesdk)
+
 ## 🛠️ Tecnologias utilizadas
 
 - **Node.js** (testado na versão 24)
